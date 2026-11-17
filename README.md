@@ -19,9 +19,9 @@ else if (en) count <= count + 1;   // increments, wraps 1111 -> 0000
 else count <= count;                // holds present value
 
 ## Design / RTL Program
-
+```
 // gedit up_counter.v
- ```
+ 
 module up_counter (
     input  wire       clk,    // clock
     input  wire       rst,    // asynchronous active-high reset
@@ -37,17 +37,13 @@ module up_counter (
             count <= count;          // hold
     end
 endmodule
-
 ```
 ## Testbench Program
 
+```
 // gedit tb7.v
-
-
-
  
 module tb7;
-
     reg  clk, rst, en;
     wire [3:0] count;
  
@@ -87,7 +83,7 @@ module tb7;
         en = 0;
         @(negedge clk);
         @(negedge clk);
- 
+
         // ---- Apply reset again mid-simulation ----
         rst = 1;
         @(negedge clk);
@@ -96,7 +92,8 @@ module tb7;
  
         #20 $finish;
     end
-    endmodule
+endmodule
+```
 
 ## Operation / Truth Table
 
@@ -157,30 +154,16 @@ The 4-bit Synchronous Up-Counter was realized using Verilog HDL, with the charac
 count(next) = count + 1   (when en = 1), wrapping from 1111 to 0000
 
 The design was compiled and simulated using Synopsys VCS, and the functionality was verified using DVE waveform analysis, matching the expected state transition table.
+<img width="1920" height="1080" alt="Screenshot 2026-11-16 110154" src="https://github.com/user-attachments/assets/0ab0bd58-e2a1-465e-ad57-17e9a3a3b0df" />
+
 
 ## Output
 
-<img width="609" height="173" alt="image" src="https://github.com/user-attachments/assets/34051c7c-087f-4759-a55f-1af528460ca0" />
 
-## Viva-Voce Questions
+<img width="1920" height="1080" alt="Screenshot 2026-11-16 110133" src="https://github.com/user-attachments/assets/848b2c60-40ef-44ba-9288-57543c20fa17" />
 
-●	What is the difference between a synchronous counter and a ripple (asynchronous) counter?
 
-●	What is the modulus of this counter, and how is it related to the number of bits?
 
-●	What happens to the count value on overflow, and why is this called 'wrap-around'?
-
-●	What is the purpose of the enable (en) input, and what would happen if it were removed?
-
-●	How would you modify this design to create a down-counter?
-
-●	How would you modify this design to create an up/down counter with a direction control input?
-
-●	What is the difference between a synchronous and an asynchronous reset, and which one is used here?
-
-●	Why is a VCD file generated, and what does $dumpvars(0, tb) do?
-
-●	How would you extend this design to an 8-bit or a mod-10 (decade) counter?
 
 ## Result
 
